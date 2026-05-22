@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ASCII Studio | 01 NEXTERA</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="fixed-bg"></div>
+    <div class="overlay"></div>
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">
+                <span style="font-size: 10px; color: rgba(255,255,255,0.4);">
+                    SYSTEM_VERSION_1.0
+                </span>
+                <h1>ASCII STUDIO</h1>
+            </div>
+
+            <div class="status" style="font-size: 10px; color: var(--accent);">
+                ● ONLINE_SUCCEEDED
+            </div>
+        </header>
+
+        <form action="/ascii-art" method="POST">
+            <div class="panel">
+                <div class="input-area">
+                    <textarea name="text" placeholder="// ENTER SOURCE CODE OR TEXT...">{{.Text}}</textarea>
+                </div>
+
+                <div class="controls">
+                    <div class="banner-select">
+                        <label class="chip">
+                            <input type="radio" name="banner" value="standard" {{if eq .Banner "standard"
+                                }}checked{{end}}>
+                            <span>STANDARD_ENGINE</span>
+                        </label>
+
+                        <label class="chip">
+                            <input type="radio" name="banner" value="shadow" {{if eq .Banner "shadow" }}checked{{end}}>
+                            <span>SHADOW_ENGINE</span>
+                        </label>
+
+                        <label class="chip">
+                            <input type="radio" name="banner" value="thinkertoy" {{if eq .Banner "thinkertoy"
+                                }}checked{{end}}>
+                            <span>THINKERTOY_ENGINE</span>
+                        </label>
+                    </div>
+
+                    <button type="submit">GENERATE_ASSET</button>
+
+                    {{if .Result}}
+                    <button type="submit" formaction="/download" formmethod="POST">
+                        DOWNLOAD_ASSET
+                    </button>
+                    {{end}}
+                </div>
+            </div>
+        </form>
+
+        {{if .Result}}
+        <div class="result-container">
+            <div class="result-head"
+                style="display: flex; justify-content: space-between; align-items: center; font-size: 10px; margin-bottom: 15px; color: rgba(255,255,255,0.5);">
+                <span>DECODED_OUTPUT_01</span>
+                <button type="button" class="copy-btn" onclick="copyResult()">
+                    [ COPY_DATA ]
+                </button>
+            </div>
+
+            <pre class="ascii-box" id="result">{{.Result}}</pre>
+        </div>
+        {{end}}
+
+        <footer>
+            <div>ASSEM && Ammar && RAHMA</div>
+            <div>01 NEXTERA</div>
+            <div>#ASCII_ART_WEB</div>
+        </footer>
+    </div>
+
+    <script>
+        function copyResult() {
+            const t = document.getElementById('result').innerText;
+            navigator.clipboard.writeText(t);
+
+            const b = document.querySelector('.copy-btn');
+            b.innerText = "[ DONE ]";
+
+            setTimeout(() => b.innerText = "COPY", 2000);
+        }
+    </script>
+</body>
+
+</html>
