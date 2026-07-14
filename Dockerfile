@@ -19,10 +19,10 @@ COPY . .
 RUN go build -o server .
 
 # --- Stage 2: Run ---
-FROM alpine:latest
+FROM alpine:3.22
 
-# Create a non-root user
-RUN addgroup -g 1001 -S appgroup && adduser -u 1001 -S appuser -G appgroup
+# # Create a non-root user
+# RUN addgroup -g 1001 -S appgroup && adduser -u 1001 -S appuser -G appgroup
 
 # Set working directory
 WORKDIR /app
@@ -35,16 +35,16 @@ COPY banners ./banners
 COPY templates ./templates
 COPY static ./static
 
-# Change ownership to non-root user
-RUN chown -R appuser:appgroup /app
+# # Change ownership to non-root user
+# RUN chown -R appuser:appgroup /app
 
 # Add metadata labels
 LABEL maintainer="ASSEM"
 LABEL version="1.0"
 LABEL description="ASCII Art Web Server"
 
-# Switch to non-root user
-USER appuser
+# # Switch to non-root user
+# USER appuser
 
 # Expose the port your server listens on
 EXPOSE 8080
