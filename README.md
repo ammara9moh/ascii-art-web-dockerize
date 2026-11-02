@@ -83,6 +83,17 @@ go run .
 
 Open http://localhost:8080 in your browser.
 
+## Deploy to Vercel
+
+Vercel supports Go backends directly. This project reads Vercel's `PORT` setting and embeds its templates, CSS, and banner files into the Go binary, so no separate static-file setup is needed.
+
+1. Push this project to a GitHub, GitLab, or Bitbucket repository.
+2. In Vercel, choose **Add New Project** and import the repository.
+3. Keep the project root set to this repository root. No framework preset, build command, output directory, or `vercel.json` is required.
+4. Deploy. Vercel will build the Go backend; the resulting URL serves the app.
+
+You can also deploy from the project directory with the Vercel CLI using `vercel` and follow its prompts.
+
 ## Docker Setup
 
 ### Why Multi-Stage Build?

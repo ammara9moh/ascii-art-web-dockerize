@@ -1,7 +1,6 @@
 package main
 
 import (
-	"os"
 	"strings"
 )
 
@@ -31,7 +30,7 @@ func renderASCII(s string, banner map[rune][]string) string {
 }
 
 func loadBanner(path string) (map[rune][]string, error) {
-	data, err := os.ReadFile(path)
+	data, err := appFiles.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}

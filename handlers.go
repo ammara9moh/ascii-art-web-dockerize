@@ -112,7 +112,7 @@ func downloadHandler(w http.ResponseWriter, r *http.Request) {
 func renderTemplate(w http.ResponseWriter, data interface{}) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	tmpl, err := template.ParseFiles("templates/index.html")
+	tmpl, err := template.ParseFS(appFiles, "templates/index.html")
 	if err != nil {
 		renderError(w, http.StatusInternalServerError)
 		return
@@ -123,9 +123,7 @@ func renderTemplate(w http.ResponseWriter, data interface{}) {
 func renderError(w http.ResponseWriter, status int) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 
-	tmpl, err := template.ParseFiles(
-		fmt.Sprintf("templates/%d.html", status),
-	)
+	tmpl, err := template.ParseFS(appFiles, fmt.Sprintf("templates/%d.html", status))
 	if err != nil {
 		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
 		return
